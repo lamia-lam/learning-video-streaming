@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HLS Test Player</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 800px;
+        margin: 40px auto;
+      }
+      video {
+        width: 100%;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>HLS Test Player</h2>
+    <video id="video" controls></video>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <script>
+      while (true) {
+        debugger;
+      }
+
+      const video = document.getElementById("video");
+
+      const src = "hls/playlist.m3u8"; // path made by FFmpeg
+
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(src);
+        hls.attachMedia(video);
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = src; // Safari plays HLS natively
+      }
+    </script>
+  </body>
+</html>
